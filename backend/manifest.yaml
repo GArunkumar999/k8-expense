@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+  namespace: expense
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend 
+  template:
+    metadata:
+      labels:
+        app: backend
+        project: expense
+        environment: dev 
+    spec:
+      containers:
+      - name: backend
+        image: arun596/backend:2.0.0
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  type: ClusterIP
+  selector: # labels are used as selectors
+     app: backend
+     project: expense
+     environment: dev 
+  ports:
+  - protocol: TCP
+    port: 8080    # service port
+    targetPort: 8080   # target port in the pod
