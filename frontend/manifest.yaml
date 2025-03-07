@@ -37,4 +37,4 @@ spec:
   ports:
   - protocol: TCP
     port: 80    # service port
-    targetPort: 80  # target port in the pod
+    targetPort: 8080 # target port in the pod
